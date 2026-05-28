@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jasa IT & Skripsi Profesional</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; color: #1a1a2e; }
+    nav {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    nav .logo { color: #e94560; font-size: 1.5rem; font-weight: 700; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+    nav ul a:hover { color: #e94560; }
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero h1 span { color: #e94560; }
+    .hero p { font-size: 1.2rem; color: #ccc; max-width: 600px; margin: 0 auto 2rem; }
+    .btn {
+      background: #e94560;
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(233,69,96,0.4); }
+    .services {
+      padding: 5rem 2rem;
+      background: #f8f9fa;
+      text-align: center;
+    }
+    .services h2 { font-size: 2rem; margin-bottom: 0.5rem; color: #1a1a2e; }
+    .services .subtitle { color: #666; margin-bottom: 3rem; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .card .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .card h3 { font-size: 1.3rem; color: #1a1a2e; margin-bottom: 0.5rem; }
+    .card p { color: #666; line-height: 1.6; }
+    .card .price { color: #e94560; font-weight: 700; font-size: 1.1rem; margin-top: 1rem; }
+    .contact {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: white;
+      text-align: center;
+    }
+    .contact h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .contact .subtitle { color: #ccc; margin-bottom: 3rem; }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    form input, form select, form textarea {
+      padding: 0.9rem 1.2rem;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    form input::placeholder, form textarea::placeholder { color: #aaa; }
+    form input:focus, form select:focus, form textarea:focus { border-color: #e94560; }
+    form select option { background: #1a1a2e; color: white; }
+    form textarea { resize: vertical; min-height: 120px; }
+    #msg {
+      padding: 0.8rem;
+      border-radius: 8px;
+      display: none;
+      font-weight: 500;
+    }
+    #msg.success { background: rgba(39,174,96,0.2); color: #27ae60; display: block; }
+    #msg.error { background: rgba(231,76,60,0.2); color: #e74c3c; display: block; }
+    footer {
+      background: #0f3460;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    footer a { color: #e94560; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">JasaIT<span style="color:#ccc;">Skripsi</span></div>
+    <ul>
+      <li><a href="#layanan">Layanan</a></li>
+      <li><a href="#order">Order</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Jasa IT & <span>Skripsi</span> Profesional</h1>
+    <p>Solusi terbaik untuk kebutuhan IT dan penyelesaian skripsi Anda. Cepat, terpercaya, dan berkualitas.</p>
+    <a href="#order" class="btn">Pesan Sekarang</a>
+  </section>
+
+  <section class="services" id="layanan">
+    <h2>Layanan Kami</h2>
+    <p class="subtitle">Berbagai solusi IT dan akademik untuk kebutuhan Anda</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>Pembuatan Website</h3>
+        <p>Desain dan pengembangan website profesional sesuai kebutuhan bisnis Anda dengan teknologi terkini.</p>
+        <div class="price">Mulai dari Rp 500.000</div>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Aplikasi Mobile</h3>
+        <p>Pengembangan aplikasi Android & iOS yang responsif dan user-friendly untuk bisnis Anda.</p>
+        <div class="price">Mulai dari Rp 1.000.000</div>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Skripsi & Tugas Akhir</h3>
+        <p>Bantuan penyusunan skripsi, penelitian, analisis data, dan bimbingan hingga selesai.</p>
+        <div class="price">Mulai dari Rp 750.000</div>
+      </div>
+      <div class="card">
+        <div class="icon">🔧</div>
+        <h3>Instalasi & Maintenance</h3>
+        <p>Layanan instalasi software, troubleshooting, dan maintenance sistem IT Anda.</p>
+        <div class="price">Mulai dari Rp 150.000</div>
+      </div>
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Analisis Data</h3>
+        <p>Pengolahan dan visualisasi data menggunakan SPSS, Python, R, dan tools analitik lainnya.</p>
+        <div class="price">Mulai dari Rp 300.000</div>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Desain UI/UX</h3>
+        <p>Perancangan antarmuka yang menarik dan intuitif menggunakan Figma dan Adobe XD.</p>
+        <div class="price">Mulai dari Rp 250.000</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="order">
+    <h2>Form Order</h2>
+    <p class="subtitle">Isi form di bawah ini, kami akan segera menghubungi Anda</p>
+    <form id="orderForm">
+      <input type="text" id="name" placeholder="Nama Lengkap *" required />
+      <input type="email" id="email" placeholder="Email *" required />
+      <input type="tel" id="phone" placeholder="No. WhatsApp *" required />
+      <select id="service" required>
+        <option value="" disabled selected>Pilih Layanan *</option>
+        <option value="website">Pembuatan Website</option>
+        <option value="mobile">Aplikasi Mobile</option>
+        <option value="skripsi">Skripsi & Tugas Akhir</option>
+        <option value="maintenance">Instalasi & Maintenance</option>
+        <option value="data">Analisis Data</option>
+        <option value="uiux">Desain UI/UX</option>
+      </select>
+      <textarea id="detail" placeholder="Deskripsi kebutuhan Anda..."></textarea>
+      <div id="msg"></div>
+      <button type="submit" class="btn" id="submitBtn">Kirim Order</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 JasaIT Skripsi. Dibuat dengan ❤️ untuk membantu Anda.</p>
+    <p style="margin-top:0.5rem;">Hubungi kami: <a href="mailto:jasait.skripsi@gmail.com">jasait.skripsi@gmail.com</a></p>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://xqjwbheelophbgkhgbna.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxandiaGVlbG9waGJna2hnYm5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5Mzg1ODQsImV4cCI6MjA5NTUxNDU4NH0.XJ7N4efBNfYRlfTtKHjlmjVcjrAnwj_Y0u2laOyt-xM';
+
+    const { createClient } = supabase;
+    const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('msg');
+      btn.disabled = true;
+      btn.textContent = 'Mengirim...';
+      msg.className = '';
+      msg.style.display = 'none';
+
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        service: document.getElementById('service').value,
+        detail: document.getElementById('detail').value.trim(),
+      };
+
+      const { error } = await sb.from('orders').insert([payload]);
+
+      if (error) {
+        msg.textContent = 'Gagal mengirim order. Silakan coba lagi. (' + error.message + ')';
+        msg.className = 'error';
+      } else {
+        msg.textContent = '✅ Order berhasil dikirim! Kami akan menghubungi Anda segera.';
+        msg.className = 'success';
+        e.target.reset();
+      }
+      btn.disabled = false;
+      btn.textContent = 'Kirim Order';
+    });
+  </script>
+</body>
+</html>

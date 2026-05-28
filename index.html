@@ -226,11 +226,11 @@
       msg.style.display = 'none';
 
       const payload = {
-        name: document.getElementById('name').value.trim(),
+        nama: document.getElementById('name').value.trim(),
         email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        service: document.getElementById('service').value,
-        detail: document.getElementById('detail').value.trim(),
+        whatsapp: document.getElementById('phone').value.trim(),
+        layanan: document.getElementById('service').value,
+        deskripsi: document.getElementById('detail').value.trim(),
       };
 
       const { error } = await sb.from('orders').insert([payload]);
@@ -245,11 +245,11 @@
                 // Kirim notifikasi email via EmailJS
                         try {
                                     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-                                                nama: payload.name,
-                                                            whatsapp: payload.phone,
+                                                nama: payload.nama,
+                                                            whatsapp: payload.whatsapp,
                                                                         email_klien: payload.email,
-                                                                                    layanan: payload.service,
-                                                                                                deskripsi: payload.detail,
+                                                                                    layanan: payload.layanan,
+                                                                                                deskripsi: payload.deskripsi,
                                                                                                             waktu: new Date().toLocaleString('id-ID'),
                                                                                                                       });
                                                                                                                               } catch (ejErr) { console.warn('EmailJS:', ejErr); }

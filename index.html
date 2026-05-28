@@ -239,7 +239,7 @@
         msg.textContent = 'Gagal mengirim order. Silakan coba lagi. (' + error.message + ')';
         msg.className = 'error';
       } else {
-        msg.textContent = '✅ Order berhasil dikirim! Kami akan menghubungi Anda segera.';
+            msg.textContent = 'Order berhasil dikirim! Kami akan menghubungi Anda segera.';
         msg.className = 'success';
         e.target.reset();
                 // Kirim notifikasi email via EmailJS
